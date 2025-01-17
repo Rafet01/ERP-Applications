@@ -93,9 +93,7 @@
         {
           "name": "RouteCreate_Candidate",
           "pattern": ":?query:",
-          "target": [
-            "TargetCreate_Candidate"
-          ]
+          "target": ["TargetCreate_Candidate"]
         }
       ],
       "targets": {

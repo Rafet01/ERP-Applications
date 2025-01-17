@@ -1,6 +1,86 @@
 <mvc:View controllerName="createcandidate.controller.Create_Candidate"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    displayBlock="true">
+    <Page id="createCandidatePage" title="Create Candidate">
+        <content>
+            <VBox id="candidateFormContainer" class="sapUiSmallMargin">
+                <f:SimpleForm
+                    xmlns:f="sap.ui.layout.form"
+                    id="candidateForm"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    title="Candidate Details"
+                    singleContainerFullSize="false">
+                    <f:content>
+                        <!-- Candidate Personal Details -->
+                        <Label id="firstNameLabel" text="First Name" />
+                        <Input id="firstNameInput" value="{candidateModel>/firstName}" />
+
+                        <Label id="lastNameLabel" text="Last Name" />
+                        <Input id="lastNameInput" value="{candidateModel>/lastName}" />
+
+                        <Label id="emailLabel" text="Email" />
+                        <Input id="emailInput" type="Email" value="{candidateModel>/email}" />
+
+                        <Label id="departmentLabel" text="Department" />
+                        <Select id="departmentSelect" selectedKey="{candidateModel>/department_ID}">
+                            <items>
+                                <core:Item id="departmentHR" key="HR" text="Human Resources" />
+                                <core:Item id="departmentIT" key="IT" text="IT Department" />
+                                <core:Item id="departmentFIN" key="FIN" text="Finance" />
+                                <core:Item id="departmentSAL" key="SAL" text="Sales" />
+                                <core:Item id="departmentMKT" key="MKT" text="Marketing" />
+                                <core:Item id="departmentDEV" key="DEV" text="Development" />
+                            </items>
+                        </Select>
+
+                        <!-- Contract Details -->
+                        <Label id="contractTypeLabel" text="Contract Type" />
+                        <Select id="contractTypeSelect" selectedKey="{candidateModel>/contractType_ID}">
+                            <items>
+                                <core:Item id="contractFullTime" key="Full Time" text="Full Time" />
+                                <core:Item id="contract4By5" key="4/5" text="4/5" />
+                                <core:Item id="contract3By5" key="3/5" text="3/5" />
+                                <core:Item id="contractHalftime" key="Halftijds" text="Halftijds" />
+                                <core:Item id="contractInternship" key="Stage" text="Stage" />
+                            </items>
+                        </Select>
+
+                        <!-- Additional Candidate Details -->
+                        <Label id="languageLabel" text="Preferred Language" />
+                        <Select id="languageSelect" selectedKey="{candidateModel>/preferredLanguage}">
+                            <items>
+                                <core:Item id="languageEN" key="EN" text="English" />
+                                <core:Item id="languageNL" key="NL" text="Dutch" />
+                                <core:Item id="languageFR" key="FR" text="French" />
+                                <core:Item id="languageDE" key="DE" text="German" />
+                            </items>
+                        </Select>
+
+                        <Label id="startDateLabel" text="Start Date" />
+                        <DatePicker id="startDatePicker" value="{candidateModel>/startDate}" />
+
+                        <Label id="seniorityLabel" text="Seniority (Years)" />
+                        <Input id="seniorityInput" type="Number" value="{candidateModel>/seniority}" />
+
+                        <Label id="statusLabel" text="Status" />
+                        <Select id="statusSelect" selectedKey="{candidateModel>/status}">
+                            <items>
+                                <core:Item id="statusApproved" key="approved" text="Approved" />
+                                <core:Item id="statusRejected" key="rejected" text="Rejected" />
+                            </items>
+                        </Select>
+                    </f:content>
+                </f:SimpleForm>
+
+                <!-- Create Button -->
+                <Button id="createButton"
+                    text="Create"
+                    press="onCreateCandidate"
+                    class="sapUiSmallMarginTop" />
+            </VBox>
+        </content>
     </Page>
 </mvc:View>

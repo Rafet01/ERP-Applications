@@ -23,6 +23,7 @@
     "watch-create_candidate": "cds watch --open create_candidate/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "sapux": [
+    "app/candidate_management",
     "app/candidate_management"
   ],
   "main": "index.js",
