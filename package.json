@@ -1,17 +1,22 @@
 {
-  "name": "HR-Candidate-Management",
+  "name": "hr-candidate-management",
   "version": "1.0.0",
   "description": "A simple CAP project.",
-  "repository": "<Add your repository here>",
+  "repository": {
+    "type": "git",
+    "url": "<Add your repository here>"
+  },
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@sap/cds": "^8",
-    "express": "^4"
+    "@sap/cds": "^8.6.1",
+    "express": "^4",
+    "hr-candidate-management": "file:",
+    "HR-Candidate-Management": "file:"
   },
   "devDependencies": {
-    "@cap-js/sqlite": "^1",
-    "@cap-js/cds-types": "^0.8.0"
+    "@cap-js/cds-types": "^0.8.0",
+    "@cap-js/sqlite": "^1"
   },
   "scripts": {
     "start": "cds-serve",
@@ -20,5 +25,8 @@
   },
   "sapux": [
     "app/candidate_management"
-  ]
+  ],
+  "main": "index.js",
+  "keywords": [],
+  "author": ""
 }

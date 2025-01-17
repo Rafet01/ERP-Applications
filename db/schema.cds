@@ -1,36 +1,48 @@
 using {
-    cuid,     // CUID is een gestandaardiseerde ID-generator voor unieke sleutels
-    managed,  // Managed voegt auditvelden zoals createdAt en modifiedAt toe
+    cuid,
+    managed
 } from '@sap/cds/common';
 
-// Context voor de Talent Management module
-context Talent {
+/**
+ * Candidate Management
+ */
+context CandidateManagement {
 
-    // Entiteit voor Kandidaten
-    entity Candidates: cuid, managed {
-        firstName          : String(50);    // Voornaam van de kandidaat
-        lastName           : String(50);    // Achternaam van de kandidaat
-        dateOfBirth        : Date;          // Geboortedatum
-        residence          : String(100);   // Woonplaats
-        email              : String(100);   // E-mailadres
-        department         : Association to Departments; // Relatie naar afdeling (bijv. HR, IT)
-        contractType       : Association to ContractTypes; // Relatie naar contracttype (bijv. FullTime)
-        reportsTo          : String(100);   // Naam van leidinggevende
-        preferredLanguage  : String(2);     // Voorkeurstaal in twee hoofdletters (bijv. "EN", "NL", "FR", "DE")
-        startDate          : Date;          // Startdatum van de kandidaat
-        seniority          : Integer;       // Anciënniteit in jaren
-        status             : String(10);    // Status van de kandidaat ("Approved", "Rejected")
+    entity Departments : cuid, managed {
+        key ID          : String(5) @title: 'Department Code';
+        description     : String(50) @title: 'Description';
+        maxCandidates   : Integer @title: 'Maximum Number of Candidates';
+    }
+    
+    entity ContractTypes : cuid, managed {
+        key ID          : String(10) @title: 'Contract Code';
+        description     : String(50) @title: 'Description';
     }
 
-    // Entiteit voor Afdelingen
-    entity Departments: managed {
-        key code          : String(3);      // Unieke code voor de afdeling (bijv. "HR")
-        description       : String(50);     // Beschrijving van de afdeling (bijv. "Human Resources")
-    }
+    entity Candidates : cuid, managed {
+        firstName       : String(50) @title: 'First Name';
+        lastName        : String(50) @title: 'Last Name';
+        fullName        : String = firstName || ' ' || lastName;
+        birthDate       : Date @title: 'Date of Birth';
+        city            : String(50) @title: 'City';
+        email           : String(100) @title: 'Email Address';
+        department      : Association to Departments @title: 'Department';
+        contractType    : Association to ContractTypes @title: 'Contract Type';
+        reportsTo       : String(50) @title: 'Reports To';
+      
+       preferredLanguage : String(2) @title: 'Preferred Language' enum {
+            EN = 'EN'; // English
+            NL = 'NL'; // Dutch
+            FR = 'FR'; // French
+            DE = 'DE'; // German
+        };
 
-    // Entiteit voor Contracttypen
-    entity ContractTypes: managed {
-        key type          : String(20);     // Unieke type-indicator (bijv. "FullTime", "PartTime")
-        description       : String(50);     // Beschrijving van het contracttype (bijv. "Full Time Employment")
-    }
+        startDate       : Date @title: 'Start Date';
+        seniority       : Integer @title: 'Seniority (Years)';
+
+        status : String(10) @title: 'Status' enum {
+            approved = 'Approved';
+            rejected = 'Rejected';
+        };
+    };
 }

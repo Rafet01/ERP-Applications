@@ -1,13 +1,22 @@
-using Talent from '../db/schema';
+using CandidateManagement from '../db/schema';
 
-service TalentService {
-    // Expose de Candidates-entiteit met standaard CRUD-operaties
-    entity Candidates as projection on Talent.Candidates;
+/**
+ * Candidate Services
+ */
+service CandidateService {
 
-    // Expose de Departments-entiteit met standaard CRUD-operaties
-    entity Departments as projection on Talent.Departments;
+    /**
+     * Expose Candidates entity
+     */
+    entity Candidates as projection on CandidateManagement.Candidates;
 
-    // Expose de ContractTypes-entiteit met standaard CRUD-operaties
-    entity ContractTypes as projection on Talent.ContractTypes;
+    /**
+     * Expose Departments entity
+     */
+    entity Departments as projection on CandidateManagement.Departments;
 
+    /**
+     * Expose ContractTypes entity
+     */
+    entity ContractTypes as projection on CandidateManagement.ContractTypes;
 }

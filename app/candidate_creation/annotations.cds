@@ -1,1 +1,0 @@
-using TalentService as service from '../../srv/services';
