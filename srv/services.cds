@@ -19,4 +19,6 @@ service CandidateService {
      * Expose ContractTypes entity
      */
     entity ContractTypes as projection on CandidateManagement.ContractTypes;
+
+    action ExportToExcel() returns array of String;
 }
