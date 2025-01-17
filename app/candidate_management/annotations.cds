@@ -97,6 +97,11 @@ annotate service.Candidates with @(
             $Type : 'UI.DataField',
             Value : seniority,
         },
+        {
+            $Type : 'UI.DataFieldForAction',
+            Action : 'CandidateService.EntityContainer/ExportToExcel',
+            Label : 'ExportToExcel',
+        },
     ],
     UI.SelectionFields : [
         firstName,
