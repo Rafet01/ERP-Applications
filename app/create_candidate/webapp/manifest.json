@@ -1,0 +1,114 @@
+{
+  "_version": "1.60.0",
+  "sap.app": {
+    "id": "createcandidate",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.16.2",
+      "toolsId": "364c825b-bce0-435e-b609-407f7eb878c4"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/candidate/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.120.25",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "createcandidate.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "createcandidate.view"
+      },
+      "routes": [
+        {
+          "name": "RouteCreate_Candidate",
+          "pattern": ":?query:",
+          "target": [
+            "TargetCreate_Candidate"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetCreate_Candidate": {
+          "id": "Create_Candidate",
+          "name": "Create_Candidate"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "createcandidate.view.App",
+      "type": "XML",
+      "id": "App"
+    }
+  }
+}

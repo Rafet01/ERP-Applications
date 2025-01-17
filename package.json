@@ -10,9 +10,7 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^8.6.1",
-    "express": "^4",
-    "hr-candidate-management": "file:",
-    "HR-Candidate-Management": "file:"
+    "express": "^4"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.8.0",
@@ -21,7 +19,8 @@
   "scripts": {
     "start": "cds-serve",
     "watch-candidate_creation": "cds watch --open candidate_creation/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-candidate_management": "cds watch --open candidate_management/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-candidate_management": "cds watch --open candidate_management/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-create_candidate": "cds watch --open create_candidate/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "sapux": [
     "app/candidate_management"

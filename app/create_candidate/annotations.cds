@@ -1,0 +1,1 @@
+using CandidateService as service from '../../srv/services';
