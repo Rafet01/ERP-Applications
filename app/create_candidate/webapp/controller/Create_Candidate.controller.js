@@ -25,53 +25,42 @@ sap.ui.define(
         this.getView().setModel(oCandidateModel, "candidateModel");
       },
 
-      onCreateCandidate() {
-        // Haal het kandidaatmodel op
-        const oModel = this.getView().getModel("candidateModel");
-        const oData = oModel.getData();
+      onCreateCandidate: function () {
+        // Haal het V4-model op
+        const oModel = this.getOwnerComponent().getModel();
+        // Stel dat je een JSONModel 'candidateModel' hebt:
+        const oData = this.getView().getModel("candidateModel").getData();
 
-        // Debug: Log de ingevulde data
-        console.log("Candidate Data:", oData);
-
-        // Basisvalidatie voor verplichte velden
-        const requiredFields = [
-          "firstName",
-          "lastName",
-          "email",
-          "department_ID",
-          "contractType_ID",
-        ];
-        const missingFields = requiredFields.filter(
-          (field) => !oData[field] || oData[field].trim() === ""
+        // Format the date to YYYY-MM-DD
+        if (oData.startDate) {
+          const oDate = new Date(oData.startDate);
+          oData.startDate = oDate.toISOString().split("T")[0];
+        }
+        // 1) Maak een ListBinding op de entity-set "/Candidates"
+        const oListBinding = oModel.bindList(
+          "/Candidates",
+          undefined,
+          undefined,
+          undefined,
+          {
+            $$updateGroupId: "createCandidate",
+          }
         );
 
-        if (missingFields.length > 0) {
-          MessageToast.show(
-            "Please fill in all required fields: " + missingFields.join(", ")
-          );
-          return;
-        }
+        // 2) Maak een "pending create" entry
+        const oNewContext = oListBinding.create(oData);
 
-        // Haal het OData-model op (verbonden aan de backend)
-        const oODataModel = this.getOwnerComponent().getModel(); // Zorg dat je `mainService` als default hebt ingesteld
-        if (!oODataModel) {
-          console.error("OData Model is not found!");
-          MessageToast.show("OData Model is not found!");
-          return;
-        }
-
-        // Stuur een create-aanroep naar de backend
-        oODataModel.create("/Candidates", oData, {
-          success: (response) => {
-            console.log("Candidate created successfully:", response);
-            MessageToast.show("Candidate created successfully!");
-            this._resetForm();
-          },
-          error: (oError) => {
-            console.error("Error creating candidate:", oError);
-            MessageBox.error("Error creating candidate. Please try again.");
-          },
-        });
+        // 3) Verstuur de batch
+        oModel
+          .submitBatch("createCandidate")
+          .then(() => {
+            sap.m.MessageToast.show("Candidate created successfully!");
+            // reset form etc.
+          })
+          .catch((err) => {
+            sap.m.MessageBox.error("Error creating candidate.");
+            console.error(err);
+          });
       },
 
       _resetForm() {
