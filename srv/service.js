@@ -32,7 +32,7 @@ module.exports = cds.service.impl(async function () {
   });
 
   // Validatie vóór het updaten van een kandidaat
-  this.before("UPDATE", "Candidates", (req) => {
+  this.before(["UPDATE", "PATCH"], "Candidates", (req) => {
     const { preferredLanguage } = req.data;
     if (
       preferredLanguage &&
