@@ -24,6 +24,7 @@
   },
   "sapux": [
     "app/candidate_management",
+    "app/candidate_management",
     "app/candidate_management"
   ],
   "main": "index.js",
