@@ -14,9 +14,12 @@ sap.ui.define(
         const oCandidateModel = new JSONModel({
           firstName: "",
           lastName: "",
+          birthDate: null, // Toegevoegd veld
+          city: "", // Toegevoegd veld
           email: "",
           department_ID: "",
           contractType_ID: "",
+          reportsTo: "", // Toegevoegd veld
           preferredLanguage: "",
           startDate: null,
           seniority: null,
@@ -28,14 +31,19 @@ sap.ui.define(
       onCreateCandidate: function () {
         // Haal het V4-model op
         const oModel = this.getOwnerComponent().getModel();
-        // Stel dat je een JSONModel 'candidateModel' hebt:
+        // Haal de data uit het JSONModel 'candidateModel'
         const oData = this.getView().getModel("candidateModel").getData();
 
-        // Format the date to YYYY-MM-DD
+        // Format the dates to YYYY-MM-DD
         if (oData.startDate) {
-          const oDate = new Date(oData.startDate);
-          oData.startDate = oDate.toISOString().split("T")[0];
+          const startDate = new Date(oData.startDate);
+          oData.startDate = startDate.toISOString().split("T")[0];
         }
+        if (oData.birthDate) {
+          const birthDate = new Date(oData.birthDate);
+          oData.birthDate = birthDate.toISOString().split("T")[0];
+        }
+
         // 1) Maak een ListBinding op de entity-set "/Candidates"
         const oListBinding = oModel.bindList(
           "/Candidates",
@@ -54,11 +62,11 @@ sap.ui.define(
         oModel
           .submitBatch("createCandidate")
           .then(() => {
-            sap.m.MessageToast.show("Candidate created successfully!");
-            // reset form etc.
+            MessageToast.show("Candidate created successfully!");
+            this._resetForm(); // Reset het formulier na succesvolle creatie
           })
           .catch((err) => {
-            sap.m.MessageBox.error("Error creating candidate.");
+            MessageBox.error("Error creating candidate.");
             console.error(err);
           });
       },
@@ -69,9 +77,12 @@ sap.ui.define(
         oModel.setData({
           firstName: "",
           lastName: "",
+          birthDate: null, // Reset veld
+          city: "", // Reset veld
           email: "",
           department_ID: "",
           contractType_ID: "",
+          reportsTo: "", // Reset veld
           preferredLanguage: "",
           startDate: null,
           seniority: null,

@@ -10,7 +10,8 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^8.6.1",
-    "express": "^4"
+    "express": "^4",
+    "hr-candidate-management": "file:"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.8.0",

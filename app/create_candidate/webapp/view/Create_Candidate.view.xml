@@ -21,6 +21,12 @@
                         <Label id="lastNameLabel" text="Last Name" />
                         <Input id="lastNameInput" value="{candidateModel>/lastName}" />
 
+                        <Label id="birthDateLabel" text="Date of Birth" />
+                        <DatePicker id="birthDatePicker" value="{candidateModel>/birthDate}" />
+
+                        <Label id="cityLabel" text="City" />
+                        <Input id="cityInput" value="{candidateModel>/city}" />
+
                         <Label id="emailLabel" text="Email" />
                         <Input id="emailInput" type="Email" value="{candidateModel>/email}" />
 
@@ -47,6 +53,9 @@
                                 <core:Item id="contractInternship" key="Stage" text="Stage" />
                             </items>
                         </Select>
+
+                        <Label id="reportsToLabel" text="Reports To" />
+                        <Input id="reportsToInput" value="{candidateModel>/reportsTo}" />
 
                         <!-- Additional Candidate Details -->
                         <Label id="languageLabel" text="Preferred Language" />

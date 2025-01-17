@@ -79,17 +79,32 @@ annotate service.Candidates with @(
         },
         {
             $Type : 'UI.DataField',
-            Label : 'fullName',
-            Value : fullName,
+            Value : reportsTo,
         },
         {
             $Type : 'UI.DataField',
-            Value : birthDate,
+            Value : status,
         },
         {
             $Type : 'UI.DataField',
-            Value : city,
+            Value : contractType_ID,
         },
+        {
+            $Type : 'UI.DataField',
+            Value : email,
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : seniority,
+        },
+    ],
+    UI.SelectionFields : [
+        firstName,
+        lastName,
+        email,
+        status,
+        reportsTo,
+        contractType.ID,
     ],
 );
 
@@ -131,5 +146,9 @@ annotate service.Candidates with {
             },
         ],
     }
+};
+
+annotate service.ContractTypes with {
+    ID @Common.Label : 'Contract Type'
 };
 
